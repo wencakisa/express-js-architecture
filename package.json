@@ -2,7 +2,7 @@
   "name": "express-js-architecture",
   "version": "1.0.0",
   "description": "Sample project architecture for Express.js",
-  "main": "app.js",
+  "main": "index.js",
   "engines": {
     "node": "7.4.0",
     "npm": "4.0.5"
