@@ -2,6 +2,10 @@ h1 {
   color: lawngreen;
 }
 
+h3 {
+  color: darkred;
+}
+
 .container {
   padding-left: 25%;
 }
@@ -17,4 +21,8 @@ h1 {
 
 .menu li:after {
   content: "\00a0";
+}
+
+.delimiter {
+  padding-left: 50px;
 }
