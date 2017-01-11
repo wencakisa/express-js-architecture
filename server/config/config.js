@@ -11,6 +11,6 @@ module.exports = {
   production: {
     rootPath: rootPath,
     db: process.env.MONGO_DB_CONN_STRING,
-    port: process.env.port
+    port: process.env.PORT
   }
 }
