@@ -18,6 +18,13 @@ module.exports = (app, config, viewsDir) => {
   }))
   app.use(passport.initialize())
   app.use(passport.session())
+  app.use((req, res, next) => {
+    if (req.user) {
+      res.locals.currentUser = req.user
+    }
+
+    next()
+  })
   app.use('/public', express.static(path.join(config.rootPath, 'public')))
 
   console.log('Express.js is ready.')

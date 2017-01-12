@@ -26,3 +26,7 @@ h3 {
 .delimiter {
   padding-left: 50px;
 }
+
+#logout-form {
+  display: inline-block;
+}

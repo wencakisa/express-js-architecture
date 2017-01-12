@@ -12,7 +12,16 @@
       <li><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
       <li class="delimiter"></li>
-      <li><a href="/users/register">Register</a></li>
+
+      {{#if currentUser}}
+        <i>Hello, {{currentUser.username}}</i>
+        <form action="/users/logout" action="post" id="logout-form">
+          <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+        </form>
+      {{else}}
+        <li><a href="/users/register">Register</a></li>
+        <li><a href="/users/login">Login</a></li>
+      {{/if}}
     </ul>
 
     {{#if globalError}}
