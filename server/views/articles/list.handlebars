@@ -1,0 +1,9 @@
+{{#if articles}}
+  {{#each articles}}
+    <ul>
+      <li><a href="/articles/details/{{_id}}">{{title}}</a></li>
+    </ul>
+  {{/each}}
+{{else}}
+  <h2>No articles yet.</h2>
+{{/if}}

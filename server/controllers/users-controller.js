@@ -1,10 +1,6 @@
 let encryption = require('../utilities/encryption')
+let errorHandler = require('../utilities/errorHandler')
 let User = require('mongoose').model('User')
-
-let returnError = (res, view) => {
-  res.render(view, { globalError: 'Woops! 500.' })
-  return
-}
 
 module.exports = {
   register: (req, res) => {
@@ -26,7 +22,7 @@ module.exports = {
             req
               .logIn(user, (err, user) => {
                 if (err) {
-                  returnError(res, 'users/register')
+                  errorHandler(res, 'users/register')
                 }
 
                 res.redirect('/')
@@ -34,7 +30,7 @@ module.exports = {
           })
           .catch(err => {
             console.log(err.toString())
-            returnError(res, 'users/register')
+            errorHandler(res, 'users/register')
           })
       }
     }
@@ -55,7 +51,7 @@ module.exports = {
             req
               .logIn(user, (err, user) => {
                 if (err) {
-                  returnError(res, 'users/login')
+                  errorHandler(res, 'users/login')
                 }
 
                 res.redirect('/')
@@ -64,7 +60,7 @@ module.exports = {
         })
         .catch(err => {
           console.log(err.toString())
-          returnError(res, 'users/login')
+          errorHandler(res, 'users/login')
         })
     }
   },

@@ -1,0 +1,9 @@
+<h4>{{title}}</h4>
+<p>{{description}}</p>
+<i>Author: {{authorUsername}}</i>
+<br />
+
+{{#if canEdit}}
+  <a href="/articles/edit/{{_id}}">Edit</a>
+  <a href="/articles/delete/{{_id}}">Delete</a>
+{{/if}}

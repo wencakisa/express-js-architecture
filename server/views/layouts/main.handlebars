@@ -14,11 +14,17 @@
       <li class="delimiter"></li>
 
       {{#if currentUser}}
+        <li><a href="/articles/list">Articles</a></li>
+        <li><a href="/articles/add">Create article</a></li>
+
+        <li class="delimiter"></li>
+
         <i>Hello, {{currentUser.username}}</i>
-        <form action="/users/logout" action="post" id="logout-form">
+        <form action="/users/logout" method="post" id="logout-form">
           <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
         </form>
       {{else}}
+        <li class="delimiter"></li>
         <li><a href="/users/register">Register</a></li>
         <li><a href="/users/login">Login</a></li>
       {{/if}}

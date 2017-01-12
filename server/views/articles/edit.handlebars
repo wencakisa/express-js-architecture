@@ -1,0 +1,12 @@
+<h1>edit your article: </h1>
+<form action="/articles/edit/{{_id}}" method="post">
+  <label for="title">Title: </label>
+  <br />
+  <input type="text" name="title" id="title" value={{title}} >
+  <br />
+  <label for="description">Description: </label>
+  <br />
+  <input type="text" name="description" id="description" value={{description}} >
+  <br />
+  <input type="submit" value="Edit">
+</form>
