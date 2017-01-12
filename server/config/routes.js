@@ -1,15 +1,22 @@
 let controllers = require('../controllers')
 let auth = require('../config/auth')
 
-module.exports = (app) => {
+module.exports = (app, express) => {
   app.get('/', controllers.home.index)
   app.get('/about', controllers.home.about)
 
-  app.get('/articles/list', auth.isAuthenticated, controllers.articles.list)
-  app.all('/articles/add', auth.isAuthenticated, controllers.articles.add)
-  app.get('/articles/details/:id', auth.isAuthenticated, controllers.articles.detail)
-  app.all('/articles/edit/:id', auth.isAuthenticated, controllers.articles.edit)
-  app.get('/articles/delete/:id', auth.isAuthenticated, controllers.articles.delete)
+  let articlesRouter = express.Router()
+  articlesRouter.use(auth.isAuthenticated)
+
+  articlesRouter
+    .get('/list', controllers.articles.list)
+    .get('/list', controllers.articles.list)
+    .all('/add', controllers.articles.add)
+    .get('/details/:id', controllers.articles.detail)
+    .all('/edit/:id', controllers.articles.edit)
+    .get('/delete/:id', controllers.articles.delete)
+
+  app.use('/articles', articlesRouter)
 
   app.all('/:controller/:method', (req, res) => {
     controllers[req.params.controller][req.params.method](req, res)

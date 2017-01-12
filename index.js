@@ -9,7 +9,7 @@ let config = require('./server/config/config')[env]
 require('./server/config/express')(app, config, viewsDir)
 require('./server/config/handlebars')(app, viewsDir)
 require('./server/config/database')(config)
-require('./server/config/routes')(app)
+require('./server/config/routes')(app, express)
 require('./server/config/passport')()
 
 app.listen(config.port)
