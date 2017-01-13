@@ -1,5 +1,4 @@
 let encryption = require('../utilities/encryption')
-let errorHandler = require('../utilities/errorHandler')
 let User = require('mongoose').model('User')
 
 module.exports = {
@@ -22,15 +21,22 @@ module.exports = {
             req
               .logIn(user, (err, user) => {
                 if (err) {
-                  errorHandler(res, 'users/register')
+                  console.log(err)
+                  res.render('users/register', {
+                    globalError: err.errors.description.message
+                  })
+                  return
                 }
 
                 res.redirect('/')
               })
           })
           .catch(err => {
-            console.log(err.toString())
-            errorHandler(res, 'users/register')
+            console.log(err)
+            res.render('users/register', {
+              globalError: err.errors.description.message
+            })
+            return
           })
       }
     }
@@ -44,14 +50,24 @@ module.exports = {
       User
         .findOne({ username: inputUser.username })
         .then(user => {
-          if (!user.authenticate(inputUser.password)) {
+          if (!user) {
+            res.render('users/login', {
+              globalError: 'User does not exist.'
+            })
+            return
+          } else if (!user.authenticate(inputUser.password)) {
             user.globalError = 'Invalid username or password.'
             res.render('users/login', user)
+            return
           } else {
             req
               .logIn(user, (err, user) => {
                 if (err) {
-                  errorHandler(res, 'users/login')
+                  console.log(err)
+                  res.render('users/login', {
+                    globalError: err.errors.description.message
+                  })
+                  return
                 }
 
                 res.redirect('/')
@@ -59,8 +75,11 @@ module.exports = {
           }
         })
         .catch(err => {
-          console.log(err.toString())
-          errorHandler(res, 'users/login')
+          console.log(err)
+          res.render('users/login', {
+            globalError: err.errors.description.message
+          })
+          return
         })
     }
   },

@@ -1,5 +1,4 @@
 let Article = require('../data/Article')
-let errorHandler = require('../utilities/errorHandler')
 
 function canEditArticle (req, article) {
   return (req.user.username === article.authorUsername)
@@ -27,7 +26,10 @@ module.exports = {
         })
         .catch(err => {
           console.log(err)
-          errorHandler(res, 'articles/add')
+          res.render('articles/add', {
+            globalError: err.errors.description.message
+          })
+          return
         })
     }
   },
@@ -42,7 +44,10 @@ module.exports = {
       })
       .catch(err => {
         console.log(err)
-        errorHandler(res, 'articles/list')
+        res.render('articles/list', {
+          globalError: err.errors.description.message
+        })
+        return
       })
   },
   edit: (req, res) => {
@@ -68,13 +73,19 @@ module.exports = {
             })
             .catch(err => {
               console.log(err)
-              errorHandler(res, 'articles/detail')
+              res.render('articles/detail', {
+                globalError: err.errors.description.message
+              })
+              return
             })
         }
       })
       .catch(err => {
         console.log(err)
-        errorHandler(res, 'articles/list')
+        res.render('articles/list', {
+          globalError: err.errors.description.message
+        })
+        return
       })
   },
   delete: (req, res) => {
@@ -96,12 +107,18 @@ module.exports = {
           })
           .catch(err => {
             console.log(err)
-            errorHandler(res, 'articles/detail')
+            res.render('articles/detail', {
+              globalError: err.errors.description.message
+            })
+            return
           })
       })
       .catch(err => {
         console.log(err)
-        errorHandler(res, 'articles/list')
+        res.render('articles/list', {
+          globalError: err.errors.description.message
+        })
+        return
       })
   }
 }
