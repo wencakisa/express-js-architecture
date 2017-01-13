@@ -10,7 +10,6 @@ module.exports = (app, express) => {
 
   articlesRouter
     .get('/list', controllers.articles.list)
-    .get('/list', controllers.articles.list)
     .all('/add', controllers.articles.add)
     .get('/details/:id', controllers.articles.detail)
     .all('/edit/:id', controllers.articles.edit)
